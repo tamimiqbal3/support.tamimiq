@@ -1,0 +1,1171 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="profile.jpg" />
+
+    <title>Support Hub | Tamim's Shop</title>
+    <style>
+      :root {
+        --bg-gradient-start: #f5f7fa;
+
+        --bg-gradient-end: #dfe6e9;
+
+        --glass-base: rgba(255, 255, 255, 0.45);
+
+        --glass-border: rgba(255, 255, 255, 0.6);
+
+        --text-main: #2d3436;
+
+        --text-muted: #636e72;
+
+        --accent-color: #4a6fa5;
+
+        --accent-hover: #3b5984;
+
+        --input-bg: rgba(255, 255, 255, 0.7);
+      }
+
+      * {
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+
+      body {
+        background:
+          radial-gradient(
+            circle at 80% 20%,
+
+            rgba(168, 218, 220, 0.35) 0%,
+
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at 10% 80%,
+
+            rgba(141, 153, 174, 0.3) 0%,
+
+            transparent 60%
+          ),
+          linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+
+        color: var(--text-main);
+
+        min-height: 100vh;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        padding: 0 15px 30px 15px;
+      }
+
+      /* --- NAVBAR ENGINE --- */
+
+      .navbar {
+        width: 100%;
+
+        max-width: 950px;
+
+        background: var(--glass-base);
+
+        border: 1px solid var(--glass-border);
+
+        border-radius: 12px;
+
+        padding: 15px 35px;
+
+        margin: 25px 0;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .nav-brand {
+        text-decoration: none;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        letter-spacing: 2px;
+
+        color: var(--text-main);
+      }
+
+      .nav-links {
+        display: flex;
+
+        gap: 15px;
+      }
+
+      .nav-btn {
+        background: transparent;
+
+        border: none;
+
+        color: var(--text-muted);
+
+        font-size: 13.5px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        padding: 6px 14px;
+
+        border-radius: 6px;
+
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover {
+        color: var(--accent-color);
+
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .nav-btn.active {
+        color: #ffffff;
+
+        background: var(--accent-color);
+      }
+
+      /* --- WRAPPER CORE --- */
+
+      .workspace-container {
+        width: 100%;
+
+        max-width: 950px;
+      }
+
+      .panel-interface {
+        display: grid;
+
+        grid-template-columns: 1fr 1.2fr;
+
+        background: var(--glass-base);
+
+        border: 1px solid var(--glass-border);
+
+        border-radius: 16px;
+
+        box-shadow:
+          0 15px 35px rgba(0, 0, 0, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+
+        overflow: hidden;
+      }
+
+      .side-dashboard {
+        background: rgba(255, 255, 255, 0.2);
+
+        padding: 30px;
+
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 25px;
+
+        justify-content: space-between;
+      }
+
+      .brand-header-link {
+        text-decoration: none;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        width: fit-content;
+
+        transition: opacity 0.2s ease;
+      }
+
+      .brand-header-link:hover {
+        opacity: 0.8;
+      }
+
+      .brand-header {
+        font-size: 14px;
+
+        font-weight: 700;
+
+        letter-spacing: 2px;
+
+        color: var(--text-main);
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      .brand-indicator-light {
+        width: 8px;
+
+        height: 8px;
+
+        background-color: var(--accent-color);
+
+        border-radius: 50%;
+      }
+
+      .main-hero-text h1 {
+        font-size: 28px;
+
+        font-weight: 800;
+
+        line-height: 1.2;
+
+        color: var(--text-main);
+
+        margin-bottom: 12px;
+      }
+
+      .main-hero-text p {
+        color: var(--text-muted);
+
+        font-size: 13.5px;
+
+        line-height: 1.6;
+      }
+
+      .system-telemetry {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+      }
+
+      .telemetry-node {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        background: rgba(255, 255, 255, 0.4);
+
+        padding: 10px 15px;
+
+        border-radius: 8px;
+
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .node-label {
+        font-size: 11px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        color: var(--text-muted);
+
+        font-weight: 600;
+      }
+
+      .node-status {
+        font-size: 12px;
+
+        font-weight: 600;
+      }
+
+      .form-interactive-area {
+        padding: 30px;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+      }
+
+      .form-grid-layout {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 15px;
+      }
+
+      .span-all-cols {
+        grid-column: span 2;
+      }
+
+      .field-box {
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .field-box label {
+        font-size: 11px;
+
+        font-weight: 700;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        color: var(--text-muted);
+
+        margin-bottom: 5px;
+      }
+
+      .form-interactive-area input,
+      .form-interactive-area select,
+      .form-interactive-area textarea {
+        width: 100%;
+
+        padding: 11px 14px;
+
+        background: var(--input-bg);
+
+        border: 1px solid rgba(255, 255, 255, 0.7);
+
+        border-radius: 8px;
+
+        color: var(--text-main);
+
+        font-size: 13.5px;
+
+        outline: none;
+
+        transition:
+          border-color 0.2s ease,
+          background-color 0.2s ease;
+      }
+
+      .form-interactive-area select {
+        appearance: none;
+
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+        background-repeat: no-repeat;
+
+        background-position: right 14px center;
+
+        background-size: 14px;
+
+        padding-right: 35px;
+      }
+
+      .form-interactive-area textarea {
+        height: 90px;
+
+        resize: none;
+      }
+
+      .ignite-action-trigger {
+        width: 100%;
+
+        background: var(--accent-color);
+
+        color: #ffffff;
+
+        border: none;
+
+        padding: 13px;
+
+        border-radius: 8px;
+
+        font-weight: 600;
+
+        font-size: 13px;
+
+        letter-spacing: 0.5px;
+
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        transition:
+          background 0.2s ease,
+          transform 0.1s ease;
+
+        margin-top: 5px;
+      }
+
+      .ignite-action-trigger:hover {
+        background: var(--accent-hover);
+      }
+
+      .direct-comms {
+        font-size: 12.5px;
+
+        color: var(--text-muted);
+
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+        padding-top: 12px;
+      }
+
+      .footer-stamp {
+        margin-top: 12px;
+
+        display: flex;
+
+        justify-content: center;
+
+        font-size: 11px;
+
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+        padding-top: 12px;
+      }
+
+      .footer-stamp a {
+        color: var(--text-muted);
+
+        text-decoration: none;
+
+        font-weight: 500;
+
+        opacity: 0.7;
+
+        transition:
+          opacity 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .footer-stamp a:hover {
+        opacity: 1;
+
+        color: var(--accent-color);
+      }
+
+      /* --- FAQ LAYOUT --- */
+
+      #faqView {
+        display: none;
+      }
+
+      .faq-layout {
+        padding: 40px;
+
+        background: var(--glass-base);
+
+        border: 1px solid var(--glass-border);
+
+        border-radius: 16px;
+
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .faq-header {
+        margin-bottom: 30px;
+
+        text-align: center;
+      }
+
+      .faq-header h2 {
+        font-size: 26px;
+
+        font-weight: 800;
+
+        color: var(--text-main);
+
+        margin-bottom: 8px;
+      }
+
+      .faq-header p {
+        color: var(--text-muted);
+
+        font-size: 14px;
+      }
+
+      .faq-wrapper {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 15px;
+      }
+
+      .faq-card {
+        background: rgba(255, 255, 255, 0.35);
+
+        border: 1px solid rgba(255, 255, 255, 0.5);
+
+        border-radius: 10px;
+
+        padding: 20px;
+      }
+
+      .faq-card h3 {
+        font-size: 15px;
+
+        font-weight: 700;
+
+        color: var(--text-main);
+
+        margin-bottom: 8px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      .faq-card h3::before {
+        content: "•";
+
+        color: var(--accent-color);
+
+        font-size: 20px;
+      }
+
+      .faq-card p {
+        font-size: 13.5px;
+
+        color: var(--text-muted);
+
+        line-height: 1.6;
+
+        padding-left: 15px;
+      }
+
+      .faq-portal-link {
+        color: var(--accent-color);
+
+        text-decoration: none;
+
+        font-weight: 600;
+
+        border-bottom: 1px dashed var(--accent-color);
+      }
+
+      /* --- NEW PAGE: SERVICES CATALOG INTERFACE --- */
+
+      #servicesView {
+        display: none;
+      }
+
+      .services-layout {
+        background: var(--glass-base);
+
+        border: 1px solid var(--glass-border);
+
+        border-radius: 16px;
+
+        padding: 40px;
+
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+
+        backdrop-filter: blur(20px);
+
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .services-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 20px;
+
+        margin-top: 25px;
+      }
+
+      .service-item-card {
+        background: rgba(255, 255, 255, 0.3);
+
+        border: 1px solid rgba(255, 255, 255, 0.5);
+
+        border-radius: 12px;
+
+        padding: 24px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        gap: 15px;
+
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+
+      .service-item-card:hover {
+        background: rgba(255, 255, 255, 0.5);
+
+        transform: translateY(-2px);
+      }
+
+      .service-main h4 {
+        font-size: 17px;
+
+        font-weight: 700;
+
+        color: var(--text-main);
+
+        margin-bottom: 8px;
+      }
+
+      .service-main p {
+        font-size: 13px;
+
+        color: var(--text-muted);
+
+        line-height: 1.5;
+      }
+
+      .service-tag {
+        align-self: flex-start;
+
+        font-size: 11px;
+
+        text-transform: uppercase;
+
+        font-weight: 700;
+
+        letter-spacing: 1px;
+
+        color: var(--accent-color);
+
+        background: rgba(74, 111, 165, 0.12);
+
+        padding: 4px 10px;
+
+        border-radius: 20px;
+      }
+
+      /* --- RESPONSIVE SETTINGS --- */
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 12px 20px;
+
+          margin: 15px 0;
+
+          flex-direction: column;
+
+          gap: 12px;
+        }
+
+        .nav-links {
+          gap: 5px;
+
+          width: 100%;
+        }
+
+        .nav-btn {
+          padding: 6px 8px;
+
+          font-size: 12px;
+
+          flex: 1;
+
+          text-align: center;
+        }
+
+        .panel-interface {
+          grid-template-columns: 1fr;
+        }
+
+        .side-dashboard {
+          border-right: none;
+
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+          padding: 25px 20px;
+        }
+
+        .form-interactive-area,
+        .faq-layout,
+        .services-layout {
+          padding: 25px 20px;
+        }
+
+        .form-grid-layout,
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .span-all-cols {
+          grid-column: span 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR AREA -->
+
+    <nav class="navbar">
+      <a href="https://www.tamimiq.shop" target="_blank" class="nav-brand">
+        <div class="brand-indicator-light"></div>
+
+        TAMIM'S SHOP
+      </a>
+
+      <div class="nav-links">
+        <button
+          id="btnSupport"
+          class="nav-btn active"
+          onclick="switchTab('support')"
+        >
+          Support Desk
+        </button>
+
+        <button
+          id="btnServices"
+          class="nav-btn"
+          onclick="switchTab('services')"
+        >
+          Products & Services
+        </button>
+
+        <button id="btnFaq" class="nav-btn" onclick="switchTab('faq')">
+          FAQ & Help
+        </button>
+      </div>
+    </nav>
+
+    <!-- MAIN INTERACTIVE WRAPPER -->
+
+    <div class="workspace-container">
+      <!-- PAGE 1: SUPPORT TERMINAL -->
+
+      <div id="supportView" class="panel-interface">
+        <div class="side-dashboard">
+          <a
+            href="https://www.tamimiq.shop"
+            target="_blank"
+            class="brand-header-link"
+          >
+            <div class="brand-header">
+              <div class="brand-indicator-light"></div>
+
+              TAMIM'S SHOP
+            </div>
+          </a>
+
+          <div class="main-hero-text">
+            <h1>Support<br />Control Center</h1>
+
+            <p>
+              Access our centralized management system. Submit technical
+              inquiries, system reports, or institutional operational feedback
+              directly to our administrative team.
+            </p>
+          </div>
+
+          <div class="system-telemetry">
+            <div class="telemetry-node">
+              <span class="node-label">System Status</span>
+
+              <span class="node-status" style="color: #27ae60">ONLINE</span>
+            </div>
+
+            <div class="telemetry-node">
+              <span class="node-label">Data Routing</span>
+
+              <span class="node-status" style="color: var(--accent-color)"
+                >24/7 AVAILABLE</span
+              >
+            </div>
+          </div>
+
+          <div class="direct-comms">
+            Communication: <strong>support@tamimiq.shop</strong>
+          </div>
+        </div>
+
+        <div class="form-interactive-area">
+          <form
+            id="operationSupportForm"
+            onsubmit="executeTerminalSubmit(event)"
+          >
+            <div class="form-grid-layout">
+              <div class="field-box">
+                <label for="usrName">Your Name</label>
+
+                <input
+                  type="text"
+                  id="usrName"
+                  placeholder="Tamim Iqbal"
+                  required
+                />
+              </div>
+
+              <div class="field-box">
+                <label for="usrEmail">Mail</label>
+
+                <input
+                  type="email"
+                  id="usrEmail"
+                  placeholder="name@domain.com"
+                  required
+                />
+              </div>
+
+              <div class="field-box span-all-cols">
+                <label for="srvCategory">Query Category</label>
+
+                <select id="srvCategory" required>
+                  <option value="" disabled selected hidden>
+                    Choose your query issue...
+                  </option>
+
+                  <option value="general">General Support Desk</option>
+
+                  <option value="delivery">
+                    Product Order & Package Delivery
+                  </option>
+
+                  <option value="tech_issue">
+                    Website Interface Bug / Technical Issue
+                  </option>
+
+                  <option value="business">
+                    Partnership & Business Agency Inquiries
+                  </option>
+
+                  <option value="payment">
+                    Billing Desk & Payment Processors
+                  </option>
+
+                  <option value="other">Other (Custom Request)</option>
+                </select>
+              </div>
+
+              <div class="field-box span-all-cols">
+                <label for="srvSubject">Subject</label>
+
+                <input
+                  type="text"
+                  id="srvSubject"
+                  placeholder="Brief subject line"
+                  required
+                />
+              </div>
+
+              <div class="field-box span-all-cols">
+                <label for="srvMsg">Detailed Message</label>
+
+                <textarea
+                  id="srvMsg"
+                  placeholder="Describe your operation instructions..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="span-all-cols">
+                <button type="submit" class="ignite-action-trigger">
+                  Submit Application
+                </button>
+              </div>
+            </div>
+
+            <div class="footer-stamp">
+              <a href="https://www.tamimiq.shop" target="_blank"
+                >Developed by Tamim Iqbal</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PAGE 2: SERVICES DASHBOARD CATALOG -->
+
+      <div id="servicesView" class="services-layout">
+        <div class="faq-header">
+          <h2>Products & Premium Services</h2>
+
+          <p>
+            Explore our curated products, ultimate design assets, and premium
+            training courses active on
+
+            <a
+              href="https://www.tamimiq.shop"
+              target="_blank"
+              class="faq-portal-link"
+              >www.tamimiq.shop</a
+            >.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-item-card">
+            <div class="service-main">
+              <h4>Premium Digital Products</h4>
+
+              <p>
+                Get access to exclusive UI elements, modern website code
+                architectures, dynamic administration templates, and asset packs
+                tailored to kickstart your project instantly.
+              </p>
+            </div>
+
+            <div class="service-tag">Shop Inventory</div>
+          </div>
+
+          <div class="service-item-card">
+            <div class="service-main">
+              <h4>Skill-Up Training & Courses</h4>
+
+              <p>
+                Master modern frontend techniques, clean backend logic
+                engineering, graphic frameworks, and expert content marketing
+                via step-by-step masterclasses.
+              </p>
+            </div>
+
+            <div class="service-tag">Academy Programs</div>
+          </div>
+
+          <div class="service-item-card">
+            <div class="service-main">
+              <h4>Interactive Interface Design</h4>
+
+              <p>
+                Custom dynamic web architectures featuring state-of-the-art
+                glassmorphic aesthetics, structured relational databases, and
+                snappy performance logic.
+              </p>
+            </div>
+
+            <div class="service-tag">Web Architectures</div>
+          </div>
+
+          <div class="service-item-card">
+            <div class="service-main">
+              <h4>Creative Agency Marketing</h4>
+
+              <p>
+                Complete cinematic video production assets, professional product
+                photography layouts, and high-impact local brand representation
+                packages.
+              </p>
+            </div>
+
+            <div class="service-tag">Marketing Systems</div>
+          </div>
+        </div>
+
+        <div class="footer-stamp" style="margin-top: 40px">
+          <a href="https://www.tamimiq.shop" target="_blank"
+            >Developed by Tamim Iqbal</a
+          >
+        </div>
+      </div>
+
+      <!-- PAGE 3: FAQ KNOWLEDGE BASE -->
+
+      <div id="faqView" class="faq-layout">
+        <div class="faq-header">
+          <h2>Frequently Asked Questions</h2>
+
+          <p>
+            Got questions? We have quick answers right here. Or explore more on
+
+            <a
+              href="https://www.tamimiq.shop"
+              target="_blank"
+              class="faq-portal-link"
+              >www.tamimiq.shop</a
+            >
+          </p>
+        </div>
+
+        <div class="faq-wrapper">
+          <div class="faq-card">
+            <h3>How do I buy a product or enroll in a course?</h3>
+
+            <p>
+              It's very simple! Just head over to our main shop at
+
+              <a
+                href="https://www.tamimiq.shop"
+                target="_blank"
+                class="faq-portal-link"
+                >www.tamimiq.shop</a
+              >, pick your favorite digital product or course, and click
+              checkout to instantly receive access.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>How will I get access to my digital items after payment?</h3>
+
+            <p>
+              Right after a successful checkout, a direct download link or
+              course enrollment invitation will be sent straight to your email
+              address. You can also view it in your account profile.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>What secure payment channels do you support?</h3>
+
+            <p>
+              We handle security seriously. Our integration safely processes
+              standard credit/debit cards along with all top local mobile
+              financial channels during checkout.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>
+              Can I ask for a custom web development or marketing project?
+            </h3>
+
+            <p>
+              Absolutely! If you need a custom-built website or production
+              services, simply open our <strong>Support Desk</strong> tab, fill
+              out the form with your details, and submit a custom query.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-stamp" style="margin-top: 30px">
+          <a href="https://www.tamimiq.shop" target="_blank"
+            >Developed by Tamim Iqbal</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CORE SCRIPT ENGINE -->
+
+    <script>
+      function switchTab(tabName) {
+        const supportView = document.getElementById("supportView");
+
+        const faqView = document.getElementById("faqView");
+
+        const servicesView = document.getElementById("servicesView");
+
+        const btnSupport = document.getElementById("btnSupport");
+
+        const btnFaq = document.getElementById("btnFaq");
+
+        const btnServices = document.getElementById("btnServices");
+
+        // Reset display
+
+        supportView.style.display = "none";
+
+        faqView.style.display = "none";
+
+        servicesView.style.display = "none";
+
+        btnSupport.classList.remove("active");
+
+        btnFaq.classList.remove("active");
+
+        btnServices.classList.remove("active");
+
+        // Open target panel
+
+        if (tabName === "support") {
+          supportView.style.display = "grid";
+
+          btnSupport.classList.add("active");
+        } else if (tabName === "faq") {
+          faqView.style.display = "block";
+
+          btnFaq.classList.add("active");
+        } else if (tabName === "services") {
+          servicesView.style.display = "block";
+
+          btnServices.classList.add("active");
+        }
+      }
+
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwwudNI5cr08J548Y3Noa4VW8zIIkSyF0TTTe_L6_gZA4GSQfg2OKDyvybhyPQje0agFQ/exec";
+
+      async function executeTerminalSubmit(event) {
+        event.preventDefault();
+
+        const actionBtn = document.querySelector(".ignite-action-trigger");
+
+        actionBtn.style.pointerEvents = "none";
+        actionBtn.style.background = "#34495e";
+        actionBtn.innerText = "SUBMITTING...";
+
+        const data = {
+          name: document.getElementById("usrName").value,
+          email: document.getElementById("usrEmail").value,
+          category: document.getElementById("srvCategory").value,
+          subject: document.getElementById("srvSubject").value,
+          message: document.getElementById("srvMsg").value,
+        };
+
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify(data),
+          });
+
+          actionBtn.style.background = "#27ae60";
+          actionBtn.innerText = "SUBMITTED SUCCESSFULLY";
+
+          alert("Success! Your inquiry has been submitted.");
+
+          document.getElementById("operationSupportForm").reset();
+        } catch (err) {
+          alert("Submission failed.");
+        }
+
+        setTimeout(() => {
+          actionBtn.style.pointerEvents = "all";
+          actionBtn.style.background = "var(--accent-color)";
+          actionBtn.innerText = "Submit Application";
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>
